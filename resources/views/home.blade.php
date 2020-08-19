@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Inicio')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<div id="wrapper">
+    @include('includes.menu_lateral')
 
-                    {{ __('You are logged in!') }}
-                </div>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            @include('includes.menu_superior')
+        </div>
+
+        <div class="row  border-bottom white-bg dashboard-header">
+            <div class="table-responsive">
+                
             </div>
         </div>
     </div>
 </div>
+
 @endsection
