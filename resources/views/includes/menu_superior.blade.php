@@ -4,7 +4,7 @@
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <li>
-            <span class="m-r-sm text-muted welcome-message">Aplicación para realizar los pedidos</span>
+            <span class="m-r-sm text-muted welcome-message">Aplicación para solicitudes de viajes</span>
         </li>
         <li>
             <a class="dropdown-item" href="{{ route('logout') }}"

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quotation extends Model
+class State extends Model
 {
     public function requests() {
-		return $this->belongsTo(Requests::class);
+		return $this->hasMany(Requests::class);
 	}
 }

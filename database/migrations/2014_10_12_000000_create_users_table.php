@@ -17,6 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
+            $table->string('documento');
+            $table->string('telefono')->nullable();
+            $table->string('area');
+            $table->string('cargo');
             $table->string('email')->unique();
             $table->string('cod_sap')->unique();
             $table->string('ceco');

@@ -23,6 +23,7 @@
     <link href="{{asset('css/plugins/dataTables/datatables.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/footable/footable.core.css')}}" rel="stylesheet">
     <link href="{{asset('css/plugins/iCheck/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
 </head>
 
 <body class="@yield('body-class')">
@@ -49,6 +50,7 @@
     <!--<script src="{{asset('js/plugins/footable/footable.all.min.js')}}"></script>
     <script src="{{asset('js/plugins/iCheck/icheck.min.js')}}"></script>-->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 </body>
 
 </html>

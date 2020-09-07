@@ -18,16 +18,16 @@
             <li>
                 <a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> <span class="nav-label">Inicio</span></a>
             </li>
-
             <li>
-                <a href="{{url('/admin/products')}}"><i class="fa fa-clipboard"></i> <span class="nav-label">Productos</span></a>
+                <a href="{{url('/request')}}"><i class="fa fa-clipboard"></i> <span class="nav-label">Solicitudes</span></a>
             </li>
+            @if (auth()->user()->role_id == 1)
+                <li>
+                    <a href="{{url('/admin/quotation/quotations')}}"><i class="fa fa-suitcase"></i> <span class="nav-label">Cotizaciones</span></a>
+                </li>
+            @endif
 
-            <li>
-                <a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label">Generar Gasto de Viaje</span></a>
-            </li>
-
-            <li>
+            <!--<li>
                 <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">Reportes</span></a>
             </li>
 
@@ -37,7 +37,7 @@
 
             <li>
                 <a href="#"><i class="fa fa-thumb-tack"></i> <span class="nav-label">Auditoria</span></a>
-            </li>
+            </li>-->
 
             <!--<li>
                 <a href='#'><i class="fa fa-dashboard"></i> <span class='nav-label'>Viajes</span></a>
