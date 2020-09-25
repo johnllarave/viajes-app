@@ -8,7 +8,7 @@
     @include('includes.menu_lateral')
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
+   <div class="row border-bottom">
             @include('includes.menu_superior')
         </div>
 
@@ -16,7 +16,7 @@
             <div class="ibox-title">
                 <h5>Lista de cotizaciones</h5>
                 @foreach ($requests as $solicitud)
-                    @if($solicitud->state_id == 1)
+                    @if($solicitud->state_id == 1 || $solicitud->state_id == 7)
                         <a href="{{url('/admin/quotation/'.$id.'/create')}}">
                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button">
                                 <strong>Crear Cotización</strong>
@@ -25,51 +25,34 @@
                     @endif
                 @endforeach
             </div>
-            <!--<div class="ibox-title">
-                <h5>Detalle de la solicitud</h5><br><br>
-                @foreach ($requests as $solicitud)
-                    <b>ID: </b>{{$solicitud->id}}<br>
-                    <b>Estado solicitud: </b>{{$solicitud->name_state}}<br>
-                    <b>Fecha: </b>{{$solicitud->fecha}}<br>
-                    <b>Nombre: </b>{{$solicitud->name .' '. $solicitud->last_name}}<br>
-                    <b>Tipo solicitud: </b>{{$solicitud->tipo_solicitud}}<br>
-                    <b>Destino 1: </b>{{$solicitud->destino_1}}<br>
-                    <b>Destino 2: </b>{{$solicitud->destino_2}}<br>
-                    <b>Destino 3: </b>{{$solicitud->destino_3}}<br>
-                    <b>Viaticos: </b>
-                    @if($solicitud->viaticos == 1)
-                        Si
-                    @else
-                        No
-                    @endif<br>
-                    <b>Justificación: </b>{{$solicitud->justificacion}}<br>
-                    <b>Observación: </b>{{$solicitud->observacion}}<br>
-                    <b>Fecha creeación: </b>{{$solicitud->created_at}}<br>
-                @endforeach
-            </div>-->
             <div class="ibox-content">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
-                                <th>Vuelo</th>
-                                <th>Aerolínea</th>
-                                <th>Hotel</th>
+                                <th>Aerolinea</th>
+                                <th>Fecha</th>
+                                <th>Total tiquete</th>
+                                <th>Total hotel</th>
                                 <th>Viaticos</th>
-                                <th>Alimento</th>
+                                <th>Total</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th>Opciones</th>
+                                <th>Enviar</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($quotation as $cotizacion)
                                 <tr>
-                                    <td>{{$cotizacion->vuelo}}</td>
                                     <td>{{$cotizacion->aerolinea}}</td>
-                                    <td>{{$cotizacion->hotel}}</td>
-                                    <td>{{$cotizacion->viatico}}</td>
-                                    <td>{{$cotizacion->alimento}}</td>
+                                    <td>{{$cotizacion->fecha}} {{$cotizacion->hora}}</td>
+                                    <td>{{number_format($cotizacion->valor_tiquete + $cotizacion->iva_vuelo + $cotizacion->otros_cargos)}}</td>
+                                    <td>{{number_format($cotizacion->valor_noche + $cotizacion->iva_hotel)}}</td>
+                                    <td>{{number_format($cotizacion->viatico)}}</td>
+                                    <td>
+                                        {{number_format($cotizacion->valor_tiquete + $cotizacion->iva_vuelo + $cotizacion->otros_cargos + $cotizacion->valor_noche + $cotizacion->iva_hotel + $cotizacion->viatico)}}
+                                    </td>
                                     @if($cotizacion->aprobacion == 1)
                                         <td>Selecionada</td>
                                     @else
@@ -78,18 +61,46 @@
 
                                     <td class="td-actions text-right text-center">
                                         @foreach ($requests as $solicitud)
-                                            @if($solicitud->state_id == 1)
+                                            @if($solicitud->state_id == 1 || $solicitud->state_id == 7)
+                                                <a href="{{url('/admin/quotation/'.$cotizacion->id_quotations.'/edit')}}" rel="tooltip" title="Editar" class="btn btn-link btn-simple btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                        @if ($cotizacion->img != "")
+                                            <a href="{{url('/contizaciones/vuelo/'.$cotizacion->img)}}" target="_blank" rel="tooltip" title="Vuelo" class="btn btn-link btn-simple btn-xs">
+                                                <i class="fa fa-fighter-jet"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" rel="tooltip" title="Vuelo" class="btn btn-link btn-simple btn-xs">
+                                                <i class="fa fa-fighter-jet"></i>
+                                            </a>
+                                        @endif
+
+                                        @if ($cotizacion->img_hotel != "")
+                                            <a href="{{url('/contizaciones/Hotel/'.$cotizacion->img_hotel)}}" target="_blank" rel="tooltip" title="Hotel" class="btn btn-link btn-simple btn-xs">
+                                                <i class="fa fa-building"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" rel="tooltip" title="Hotel" class="btn btn-link btn-simple btn-xs">
+                                                <i class="fa fa-building"></i>
+                                            </a>
+                                        @endif
+                                        
+                                        <a href="{{url('/admin/quotation/'.$cotizacion->id_quotations.'/detailcotizacion')}}" rel="tooltip" title="Ver detalle cotización" class="btn btn-link btn-simple btn-xs">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @foreach ($requests as $solicitud)
+                                            @if($solicitud->state_id == 1 || $solicitud->state_id == 7)
                                                 <form method="GET" action="{{url('/mails/'.$cotizacion->id_quotations.'/quotation_email')}}">
-                                                    <a href="{{url('/admin/quotation/'.$cotizacion->id_quotations.'/edit')}}" rel="tooltip" title="Editar" class="btn btn-link btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
                                                     <button type="submit" class="btn btn-link btn-simple btn-xs" title="Enviar cotización">
-                                                        <i class="fa fa-check-square-o"></i>
+                                                        <i class="fa fa-paper-plane-o"></i>
                                                     </button>
                                                 </form>
                                             @endif
                                         @endforeach
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -97,13 +108,15 @@
 
                         <tfoot>
                             <tr>
-                                <th>Vuelo</th>
-                                <th>Aerolínea</th>
-                                <th>Hotel</th>
+                                <th>Aerolinea</th>
+                                <th>Fecha</th>
+                                <th>Total tiquete</th>
+                                <th>Total hotel</th>
                                 <th>Viaticos</th>
-                                <th>Alimento</th>
+                                <th>Total</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th>Opciones</th>
+                                <th>Enviar</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('documento');
             $table->string('telefono')->nullable();
             $table->string('area');
+            $table->string('empresa');
             $table->string('cargo');
             $table->string('email')->unique();
             $table->string('cod_sap')->unique();

@@ -27,8 +27,8 @@
                             <div class="col-md-12">
                                 @php
                                     $array_tipo = array('Terrestre' => 'Terrestre',
-                                                        'Aéreo' => 'Aéreo',
-                                                        'Internacional' => 'Internacional');
+                                                        'Aéreo nacional' => 'Aéreo nacional',
+                                                        'Aéreo internacional' => 'Aéreo internacional');
                                 @endphp
                                 <div class="form-group col-md-3">
                                     <label>Tipo solicitud</label>
@@ -73,7 +73,8 @@
                                                                  'Evento, Lanzamiento, Jornada' => 'Evento, Lanzamiento, Jornada',
                                                                  'Capacitación Docentes' => 'Capacitación Docentes',
                                                                  'Capacitación Interna - Colaboradores' => 'Capacitación Interna - Colaboradores',
-                                                                 'Reunión con Delegaciones' => 'Reunión con Delegaciones');
+                                                                 'Reunión con Delegaciones' => 'Reunión con Delegaciones',
+                                                                 'Otro' => 'Otro');
                                 @endphp
                                 <div class="form-group col-md-6">
                                     <label>Justificación</label>
@@ -158,10 +159,32 @@
                                     </div>
                                 </div>
                                 @php
+                                    $array_jornada_1 = array('Mañana' => 'Mañana',
+                                                             'Tarde' => 'Tarde',
+                                                             'Noche' => 'Noche');
+                                @endphp
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_1" class="form-control">
+                                        @foreach ($array_jornada_1 as $value => $name)
+                                            @if ($requests->jornada_1 == $value)
+                                                <option value="{{$value}}" selected>{{$name}}</option>
+                                            @else
+                                                <option value="{{$value}}">{{$name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('jornada_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
+                                        </span>
+                                    @enderror
+                                </div>
+                                @php
                                     $array_hotel_1 = array('1' => 'Si',
                                                            '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_1" class="form-control">
                                         @foreach ($array_hotel_1 as $value => $name)
@@ -182,7 +205,7 @@
                                     $array_equipaje_1 = array('1' => 'Si',
                                                               '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_1" class="form-control">
                                         @foreach ($array_equipaje_1 as $value => $name)
@@ -223,20 +246,10 @@
                                 <div class="form-group col-md-4">
                                     <label>Origen</label>
                                     <input type="text" name="origen_2" class="form-control" value="{{$requests->origen_2}}">
-                                    @error('origen_2')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Destino</label>
                                     <input type="text" name="destino_2" class="form-control" value="{{$requests->destino_2}}">
-                                    @error('destino_2')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -245,11 +258,6 @@
                                         <div class="form-group col-md-3">
                                             <label>Fecha salida</label>
                                             <input type="text" name="start_2" id="start_2" class="form-control" value="{{$requests->fecha_salida_2}}">
-                                            @error('start_2')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                                </span>
-                                            @enderror
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Fecha retorno 
@@ -261,11 +269,29 @@
                                     </div>
                                 </div>
                                 @php
+                                    $array_jornada_2 = array('' => '',
+                                                             'Mañana' => 'Mañana',
+                                                             'Tarde' => 'Tarde',
+                                                             'Noche' => 'Noche');
+                                @endphp
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_2" class="form-control">
+                                        @foreach ($array_jornada_2 as $value => $name)
+                                            @if ($requests->jornada_2 == $value)
+                                                <option value="{{$value}}" selected>{{$name}}</option>
+                                            @else
+                                                <option value="{{$value}}">{{$name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @php
                                     $array_hotel_2 = array('' => '',
                                                            '1' => 'Si',
                                                            '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_2" class="form-control">
                                         @foreach ($array_hotel_2 as $value => $name)
@@ -276,18 +302,13 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                    @error('hotel_2')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                                 @php
                                     $array_equipaje_2 = array('' => '',
                                                               '1' => 'Si',
                                                               '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_2" class="form-control">
                                         @foreach ($array_equipaje_2 as $value => $name)
@@ -298,11 +319,6 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                    @error('equipaje_2')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -328,20 +344,10 @@
                                 <div class="form-group col-md-4">
                                     <label>Origen</label>
                                     <input type="text" name="origen_3" class="form-control" value="{{$requests->origen_3}}">
-                                    @error('origen_3')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Destino</label>
                                     <input type="text" name="destino_3" class="form-control" value="{{$requests->destino_3}}">
-                                    @error('destino_3')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12" style="background-color: #F8F8F8;">
@@ -350,11 +356,6 @@
                                         <div class="form-group col-md-3">
                                             <label>Fecha salida</label>
                                             <input type="text" name="start_3" id="start_3" class="form-control" value="{{$requests->fecha_salida_3}}">
-                                            @error('start_3')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                                </span>
-                                            @enderror
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Fecha retorno 
@@ -366,11 +367,29 @@
                                     </div>
                                 </div>
                                 @php
+                                    $array_jornada_3 = array('' => '',
+                                                             'Mañana' => 'Mañana',
+                                                             'Tarde' => 'Tarde',
+                                                             'Noche' => 'Noche');
+                                @endphp
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_3" class="form-control">
+                                        @foreach ($array_jornada_3 as $value => $name)
+                                            @if ($requests->jornada_3 == $value)
+                                                <option value="{{$value}}" selected>{{$name}}</option>
+                                            @else
+                                                <option value="{{$value}}">{{$name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @php
                                     $array_hotel_3 = array('' => '',
                                                            '1' => 'Si',
                                                            '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_3" class="form-control">
                                         @foreach ($array_hotel_3 as $value => $name)
@@ -381,18 +400,13 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                    @error('hotel_3')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                                 @php
                                     $array_equipaje_3 = array('' => '',
                                                               '1' => 'Si',
                                                               '0' => 'No');
                                 @endphp
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_3" class="form-control">
                                         @foreach ($array_equipaje_3 as $value => $name)
@@ -403,11 +417,6 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                    @error('equipaje_3')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -416,6 +425,11 @@
                                     <label>Observación</label>
                                     <textarea class="form-control" name="observacion" rows="4">{{$requests->observacion}}</textarea>
                                 </div>
+                                @error('observacion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
+                                    </span>
+                                @enderror
 
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs">

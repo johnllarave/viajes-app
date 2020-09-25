@@ -23,6 +23,12 @@
             </li>
             @if (auth()->user()->role_id == 1)
                 <li>
+                    <a href="{{url('/estados')}}"><i class="fa fa-window-restore"></i> <span class="nav-label">Estados</span></a>
+                </li>
+                <li>
+                    <a href="{{url('/estados/pendiente')}}"><i class="fa fa-plane"></i> <span class="nav-label">Pendientes</span></a>
+                </li>
+                <li>
                     <a href="{{url('/admin/quotation/quotations')}}"><i class="fa fa-suitcase"></i> <span class="nav-label">Cotizaciones</span></a>
                 </li>
             @endif

@@ -15,11 +15,18 @@ class CreateQuotationsTable extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
-            $table->string('vuelo')->nullable();
             $table->string('aerolinea')->nullable();
-            $table->string('hotel')->nullable();
+            $table->string('valor_tiquete')->nullable();
+            $table->string('iva_vuelo')->nullable();
+            $table->string('otros_cargos')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('hora')->nullable();
+            $table->string('cabina')->nullable();
+            $table->string('img')->nullable();
+            $table->string('valor_noche')->nullable();
+            $table->string('iva_hotel')->nullable();
             $table->string('viaticos')->nullable();
-            $table->string('alimento')->nullable();
+            $table->string('img_hotel')->nullable();
             $table->boolean('aprobacion')->default(false);
             $table->timestamps();
 

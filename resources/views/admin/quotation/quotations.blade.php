@@ -14,7 +14,7 @@
 
         <div class="row  border-bottom white-bg dashboard-header">
             <div class="ibox-title">
-                <h5>Total de cotizaciones</h5>
+                <h5>Total de cotizaciones - Tabla pendiente para los reportes</h5>
             </div>
             <div class="ibox-content">
                 <div class="table-responsive">

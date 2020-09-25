@@ -30,5 +30,14 @@ class StateTableSeeder extends Seeder
 	    State::create([
             'nombre' => 'Cancelado'
 	    ]);
+        State::create([
+            'nombre' => 'Rechazado'
+        ]);
+        State::create([
+            'nombre' => 'Comprado'
+        ]);
+        State::create([
+            'nombre' => 'Aprobado'
+        ]);
     }
 }

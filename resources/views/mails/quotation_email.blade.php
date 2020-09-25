@@ -39,9 +39,9 @@
 </style>
 <body>
 	@foreach ($msg as $valores)
-		<p>Buenas tardes</p>
+		<p>Buen día, Correo para autorizar la cotización</p>
 		<p>Se ha generado una cotización para el gasto de viaje solicitado # {{$valores->id_requests}}</p>
-		<p>A continuación se detallaran los datos de la solicitud la cual usted debera validar y confirmar esta cotización</p>
+		<p>A continuación se detallan los datos de la solicitud la cual usted debera validar y confirmar esta cotización</p>
 
 		<table border="1" style="border-collapse: collapse; text-align: center;">
 			<tr>
@@ -111,27 +111,61 @@
 
 		<table border="1" style="border-collapse: collapse; text-align: center;">
 			<tr>
-				<th colspan="5">Detalle de la cotización</th>
+				<th colspan="9">Detalle de la cotización</th>
 			</tr>
 			<tr>
-				<td>Vuelo</td>
 				<td>Aerolínea</td>
-				<td>Hotel</td>
+				<td>Valor tiquete</td>
+				<td>Iva vuelo</td>
+				<td>Otros cargos</td>
+				<td>Fecha</td>
+				<td>Cabina</td>
+				<td>Valor hotel</td>
+				<td>Iva hotel</td>
 				<td>Viaticos</td>
-				<td>Alimentación</td>
 			</tr>
 			<tr>
-				<td>{{$valores->vuelo}}</td>
 				<td>{{$valores->aerolinea}}</td>
-				<td>{{$valores->hotel}}</td>
-				<td>{{$valores->viaticos}}</td>
-				<td>{{$valores->alimento}}</td>
+				<td>{{number_format($valores->valor_tiquete)}}</td>
+				<td>{{number_format($valores->iva_vuelo)}}</td>
+				<td>{{number_format($valores->otros_cargos)}}</td>
+				<td>{{$valores->fecha}} {{$valores->hora}}</td>
+				<td>{{$valores->cabina}}</td>
+				<td>{{number_format($valores->valor_noche)}}</td>
+				<td>{{number_format($valores->iva_hotel)}}</td>
+				<td>{{number_format($valores->viaticos)}}</td>
 			</tr>
 		</table><br>
 
-		<a href=""><button id="btn_aceptar">Aceptar</button></a>
-		<a href=""><button id="btn_rechazar">Rechazar</button></a>
-		<a href=""><button id="btn_cancelar">Cancelar</button></a>
+		<table border="1" style="border-collapse: collapse; text-align: center;">
+			<tr>
+				<th colspan="4">Total de la cotización</th>
+			</tr>
+			<tr>
+				<th>Total tiquete</th>
+                <th>Total hotel</th>
+                <th>Viaticos</th>
+                <th>Total</th>
+			</tr>
+			<tr>
+				<td>{{number_format($valores->valor_tiquete + $valores->iva_vuelo + $valores->otros_cargos)}}</td>
+                <td>{{number_format($valores->valor_noche + $valores->iva_hotel)}}</td>
+                <td>{{$valores->viaticos}}</td>
+                <td>
+                    {{number_format($valores->valor_tiquete + $valores->iva_vuelo + $valores->otros_cargos + $valores->valor_noche + $valores->iva_hotel + $valores->viaticos)}}
+                </td>
+			</tr>
+		</table><br>
+
+		<a href="http://localhost/laravel/viajes-app/public/mails/{{$valores->id_quotations}}/aceptar_email">
+			<button id="btn_aceptar">Aceptar</button>
+		</a>
+		<a href="http://localhost/laravel/viajes-app/public/">
+			<button id="btn_rechazar">Rechazar</button>
+		</a>
+		<a href="http://localhost/laravel/viajes-app/public/">
+			<button id="btn_cancelar">Cancelar</button>
+		</a>
 	@endforeach
 </body>
 </html>

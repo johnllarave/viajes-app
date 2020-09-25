@@ -60,11 +60,15 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
+                                    <label>Empresa</label>
+                                    <input class="form-control" value="{{$detalle->empresa}}" readonly>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label>Tipo solicitud</label>
                                     <input class="form-control" value="{{$detalle->tipo_solicitud}}" readonly>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-2">
                                     <label>Viáticos</label>
                                     @if ($detalle->viaticos == 1)
                                         <input class="form-control" value="Si" readonly>
@@ -82,7 +86,7 @@
                                 <br><h3 style="text-align: center;"><b>Trayecto 1</b></h3>
                                 <div class="form-group col-md-4">
                                     <label>Tipo de viaje</label>
-                                    <input class="form-control" value="{{$detalle->array_tipo_viaje_1}}" readonly>
+                                    <input class="form-control" value="{{$detalle->tipo_viaje_1}}" readonly>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Origen</label>
@@ -126,7 +130,7 @@
                                 <br><h3 style="text-align: center;"><b>Trayecto 2</b></h3>
                                 <div class="form-group col-md-4">
                                     <label>Tipo de viaje</label>
-                                    <input class="form-control" value="{{$detalle->array_tipo_viaje_2}}" readonly>
+                                    <input class="form-control" value="{{$detalle->tipo_viaje_2}}" readonly>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Origen</label>
@@ -170,7 +174,7 @@
                                 <br><h3 style="text-align: center;"><b>Trayecto 3</b></h3>
                                 <div class="form-group col-md-4">
                                     <label>Tipo de viaje</label>
-                                    <input class="form-control" value="{{$detalle->array_tipo_viaje_3}}" readonly>
+                                    <input class="form-control" value="{{$detalle->tipo_viaje_3}}" readonly>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Origen</label>

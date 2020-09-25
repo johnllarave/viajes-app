@@ -28,6 +28,7 @@ class CreateRequestsTable extends Migration
             $table->string('dias_1');
             $table->boolean('hotel_1');
             $table->boolean('equipaje_1');
+            $table->string('jornada_1');
 
             $table->string('tipo_viaje_2')->nullable();
             $table->string('origen_2')->nullable();
@@ -37,6 +38,7 @@ class CreateRequestsTable extends Migration
             $table->string('dias_2')->nullable();
             $table->boolean('hotel_2')->nullable();
             $table->boolean('equipaje_2')->nullable();
+            $table->string('jornada_2')->nullable();
 
             $table->string('tipo_viaje_3')->nullable();
             $table->string('origen_3')->nullable();
@@ -46,6 +48,7 @@ class CreateRequestsTable extends Migration
             $table->string('dias_3')->nullable();
             $table->boolean('hotel_3')->nullable();
             $table->boolean('equipaje_3')->nullable();
+            $table->string('jornada_3')->nullable();
 
             $table->text('observacion')->nullable();
             $table->boolean('estado')->default(true);
@@ -56,6 +59,8 @@ class CreateRequestsTable extends Migration
 
             $table->unsignedBigInteger('state_id')->nullable();
             //$table->foreign('state_id')->references('id')->on('states');
+
+            $table->text('observacion_estado')->nullable();
         });
     }
 

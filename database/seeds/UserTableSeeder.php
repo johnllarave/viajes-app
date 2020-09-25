@@ -18,6 +18,7 @@ class UserTableSeeder extends Seeder
             'documento' => '1024505008',
             'telefono' => '3211234567',
             'area' => 'Tecnologia',
+            'empresa' => 'Comercializadora',
 	    	'cargo' => 'Responsable Tecnico de aplicaciones empresariales',
             'email' => 'john.llarave@grupo-sm.com',
             'cod_sap' => '70951',
@@ -32,11 +33,26 @@ class UserTableSeeder extends Seeder
             'documento' => '775617',
             'telefono' => '3211234567',
             'area' => 'Compras',
+            'empresa' => 'Comercializadora',
             'cargo' => 'Gerente de compras y tecnoloia',
             'email' => 'leonardo.vargas@grupo-sm.com',
             'cod_sap' => '10985',
             'ceco' => '6510CE',
             'jefe' => '1',
+            'password' => bcrypt('123123'),
+            'role_id' => '2'
+        ]);
+        User::create([
+            'name' => 'Robinson Estiven',
+            'last_name' => 'Velasquez Sanches',
+            'documento' => '1106892158',
+            'telefono' => '3164742470',
+            'area' => 'Tecnologia',
+            'cargo' => 'Responsable de soporte y mantenimiento',
+            'email' => 'robinson.velasquez@grupo-sm.com',
+            'cod_sap' => '70920',
+            'ceco' => '7320CC',
+            'jefe' => '2',
             'password' => bcrypt('123123'),
             'role_id' => '2'
         ]);

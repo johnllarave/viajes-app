@@ -30,8 +30,8 @@
                                     <select name="tipo_solicitud" class="form-control">
                                         <option></option>
                                         <option value="Terrestre">Terrestre</option>
-                                        <option value="Aéreo">Aéreo</option>
-                                        <option value="Internacional">Internacional</option>
+                                        <option value="Aéreo nacional">Aéreo nacional</option>
+                                        <option value="Aéreo internacional">Aéreo internacional</option>
                                     </select>
                                     @error('tipo_solicitud')
                                         <span class="invalid-feedback" role="alert">
@@ -61,6 +61,7 @@
                                         <option value="Capacitación Docentes">Capacitación Docentes</option>
                                         <option value="Capacitación Interna - Colaboradores">Capacitación Interna - Colaboradores</option>
                                         <option value="Reunión con Delegaciones">Reunión con Delegaciones</option>
+                                        <option value="Otro">Otro</option>
                                     </select>
                                     @error('justificacion')
                                         <span class="invalid-feedback" role="alert">
@@ -103,15 +104,6 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <!--<div class="form-group col-md-3">
-                                    <label>Retorno</label>
-                                    <input type="text" name="retorno_1" class="form-control" value="{{old('retorno_1')}}">
-                                    @error('retorno_1')
-                                        <span class="invalid-feedback" role="alert">
-                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
-                                        </span>
-                                    @enderror
-                                </div>-->
                             </div>
                             <div class="col-md-12" style="background-color: #F8F8F8;">
                                 <div id="data_5">
@@ -132,7 +124,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_1" class="form-control">
+                                        <option></option>
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>
+                                    </select>
+                                    @error('jornada_1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_1" class="form-control">
                                         <option></option>
@@ -145,7 +151,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_1" class="form-control">
                                         <option></option>
@@ -193,7 +199,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_2" class="form-control">
+                                        <option></option>
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_2" class="form-control">
                                         <option></option>
@@ -201,7 +216,7 @@
                                         <option value="0">No</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_2" class="form-control">
                                         <option></option>
@@ -244,7 +259,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
+                                    <label>Jornada</label>
+                                    <select name="jornada_3" class="form-control">
+                                        <option></option>
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label>Hotel</label>
                                     <select name="hotel_3" class="form-control">
                                         <option></option>
@@ -252,7 +276,7 @@
                                         <option value="0">No</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Equipaje de bodega</label>
                                     <select name="equipaje_3" class="form-control">
                                         <option></option>
@@ -267,6 +291,11 @@
                                     <label>Observación</label>
                                     <textarea class="form-control" name="observacion" rows="4">{{old('observacion')}}</textarea>
                                 </div>
+                                @error('observacion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
+                                    </span>
+                                @enderror
 
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs">

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Quotation;
 use App\Requests;
 use App\Mail\EmailQuotation;
+use App\History;
 
 class QuotationController extends Controller
 {
@@ -22,6 +23,7 @@ class QuotationController extends Controller
 		$quotation = Quotation::select('quotations.id AS id_quotations', 'quotations.viaticos AS viatico', 'quotations.*', 'requests.*')
 									->join('requests', 'requests.id', '=', 'quotations.requests_id')
 									->where('quotations.requests_id', '=', $id)
+									//->where('quotations.aprobacion', '=', 1)
 									->get();
 
 		$quotations = Quotation::select('quotations.id AS id_quotations', 'quotations.viaticos AS viatico', 'quotations.*', 'requests.*')
@@ -53,12 +55,34 @@ class QuotationController extends Controller
 
 		$quotation = new Quotation();
 
-		$quotation->vuelo = $request->input('vuelo');
 		$quotation->aerolinea = $request->input('aerolinea');
-		$quotation->hotel = $request->input('hotel');
+		$quotation->valor_tiquete = $request->input('valor_tiquete');
+		$quotation->iva_vuelo = $request->input('iva_vuelo');
+		$quotation->otros_cargos = $request->input('otros_cargos');
+		$quotation->fecha = $request->input('fecha');
+		$quotation->hora = $request->input('hora');
+		$quotation->cabina = $request->input('cabina');
+		$quotation->valor_noche = $request->input('valor_noche');
+		$quotation->iva_hotel = $request->input('iva_hotel');
 		$quotation->viaticos = $request->input('viaticos');
-		$quotation->alimento = $request->input('alimento');
 		$quotation->requests_id = $request->input('id');
+
+		$file_1 = $request->file('img');
+		if ($file_1 != "") {
+			$path_1 = public_path() . '/contizaciones/vuelo';
+			$fileName_1 = uniqid() . $file_1->getClientOriginalName();
+			$moved_1 = $file_1->move($path_1, $fileName_1);
+			$quotation->img = $fileName_1;
+		}
+
+		$file_2 = $request->file('img_hotel');
+		if ($file_2 != "") {
+			$path_2 = public_path() . '/contizaciones/hotel';
+			$fileName_2 = uniqid() . $file_2->getClientOriginalName();
+			$moved_2 = $file_2->move($path_2, $fileName_2);
+			$quotation->img_hotel = $fileName_2;
+		}
+
 		$quotation->save(); //INSERT
 
 		return redirect('/admin/quotation/'.$id.'/index');
@@ -75,11 +99,35 @@ class QuotationController extends Controller
 
 		$quotation = Quotation::find($id);
 
-		$quotation->vuelo = $request->input('vuelo');
 		$quotation->aerolinea = $request->input('aerolinea');
-		$quotation->hotel = $request->input('hotel');
+		$quotation->valor_tiquete = $request->input('valor_tiquete');
+		$quotation->iva_vuelo = $request->input('iva_vuelo');
+		$quotation->otros_cargos = $request->input('otros_cargos');
+		$quotation->fecha = $request->input('fecha');
+		$quotation->hora = $request->input('hora');
+		$quotation->cabina = $request->input('cabina');
+		$quotation->valor_noche = $request->input('valor_noche');
+		$quotation->iva_hotel = $request->input('iva_hotel');
 		$quotation->viaticos = $request->input('viaticos');
-		$quotation->alimento = $request->input('alimento');
+
+		$file_1 = $request->file('img');
+		// si el campo de la imagen viene vacia no entra a esta condición
+		if ($file_1 != '') {
+			$path_1 = public_path() . '/contizaciones/vuelo';
+			$fileName_1 = uniqid() . $file_1->getClientOriginalName();
+			$moved_1 = $file_1->move($path_1, $fileName_1);
+			$quotation->img = $fileName_1;
+		}
+
+		$file_2 = $request->file('img_hotel');
+		// si el campo de la imagen del hotel viene vacia no entra a esta condición
+		if ($file_2 != '') {
+			$path_2 = public_path() . '/contizaciones/hotel';
+			$fileName_2 = uniqid() . $file_2->getClientOriginalName();
+			$moved_2 = $file_2->move($path_2, $fileName_2);
+			$quotation->img_hotel = $fileName_2;
+		}
+
 		$quotation->save(); //UPDATE
 
 		return redirect('/admin/quotation/'.$request->input('id').'/index');
@@ -109,8 +157,23 @@ class QuotationController extends Controller
 		$requests->state_id = 2;
 		$requests->save();
 
-		Mail::to(''.$email.'')->send(new EmailQuotation($query));
+		//Mail::to(''.$email.'')->send(new EmailQuotation($query));
+		Mail::to('john.llarave@grupo-sm.com')->send(new EmailQuotation($query));
+
+		$log_history = new History();
+
+		$log_history->state_id = 2;
+		$log_history->requests_id = $id_requests;
+		$log_history->observacion = 'Solicitud cotizada';
+		$log_history->save();
 
 		return back();
+	}
+
+	public function detailcotizacion ($id) {
+
+		$quotation = Quotation::find($id);
+
+		return view('admin.quotation.detailcotizacion')->with(compact('quotation'));
 	}
 }

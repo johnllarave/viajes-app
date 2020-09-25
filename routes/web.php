@@ -25,19 +25,42 @@ Route::post('/request', 'RequestController@store');
 Route::get('/request/{id}/edit', 'RequestController@edit');
 Route::post('/request/{id}/edit', 'RequestController@update');
 
+Route::post('/request/{id}/rechaza', 'RequestController@rechaza');
+Route::post('/request/{id}/cancela', 'RequestController@cancela');
+
 //Opciones unicas del administrador
-Route::middleware(['auth', 'quotation'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 	Route::get('/admin/quotation/{id}/index', 'QuotationController@index');
 	Route::get('/admin/quotation/{id}/create', 'QuotationController@create');
 	Route::post('/admin/quotation/{id}', 'QuotationController@store');
 	Route::get('/admin/quotation/{id}/edit', 'QuotationController@edit');
 	Route::post('/admin/quotation/{id}/edit', 'QuotationController@update');
 
-	Route::get('/admin/quotation/quotations', 'QuotationController@index');
+	Route::get('/admin/quotation/quotations', 'QuotationController@index');//opcion para el reporte general
 	Route::get('/admin/quotation/{id}/detail', 'QuotationController@detail');
+	Route::get('/admin/quotation/{id}/detailcotizacion', 'QuotationController@detailcotizacion');
 
 	Route::get('/mails/{id}/quotation_email', 'QuotationController@email');
+
+	Route::get('/estados', 'OptionController@estados');
+	Route::get('/estados/pendiente', 'OptionController@pendientes');
+
+	Route::get('/compra/{id}/index', 'BuyController@index');
+	Route::post('/compra/{id}', 'BuyController@store');
+
+	//Route::get('/admin/pending', 'PendingController@index');
 });
+
+/*Rutas que se ejecutan por fuera de la apliación*/
+Route::get('/mails/{id}/aceptar_email', 'AutorizacionController@acepta');
+Route::get('/mails/{id}/autoriza_email', 'AutorizacionController@autoriza');
+
+
+//Route::get('/mails/{id}/aprueba_email', 'AutorizacionController@aprueba');
+
+//Route::get('/mails/{id}/rechaza_email', 'AutorizacionController@rechaza');
+//Route::get('/mails/{id}/autoriza_email', 'AutorizacionController@autoriza');
+//Route::get('/mails/{id}/aprueba_email', 'AutorizacionController@aprueba');
 
 /*Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/products', 'ProductController@index'); //listado de productos editar eliminar
