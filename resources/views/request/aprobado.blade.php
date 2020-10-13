@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pendientes')
+@section('title', 'Aprobado')
 
 @section('content')
 
@@ -82,9 +82,6 @@
                                         <form method="GET" action="{{url('/compra/'.$solicitud->id_quotations.'/mails')}}">
                                             <a href="{{url('/compra/'.$solicitud->id_quotations.'/index')}}" rel="tooltip" title="Generar compra" class="btn btn-link btn-simple btn-xs">
                                                 <i class="fa fa-money"></i>
-                                            </a>
-                                            <a href="{{url('/compra/'.$solicitud->id_requests.'/aprobar')}}" rel="tooltip" title="Aprobar" class="btn btn-link btn-simple btn-xs">
-                                                <i class="fa fa-arrow-right"></i>
                                             </a>
                                             <button type="submit" class="btn btn-link btn-simple btn-xs" title="Enviar compra">
                                                 <i class="fa fa-paper-plane-o"></i>

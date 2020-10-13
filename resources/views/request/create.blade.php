@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Viáticos</label>
-                                    <select name="viaticos" class="form-control">
+                                    <select name="viaticos" id="viaticos" class="form-control">
                                         <option></option>
                                         <option value="1">Si</option>
                                         <option value="0">No</option>
@@ -68,6 +68,27 @@
                                             <i style="color: red; font-size: 0.8em;"><b>{{ $message }}</b></i>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div id="valores" style="display: none;">
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-3">
+                                        <label>Alimentación</label>
+                                        <input type="text" name="alimentacion" class="form-control suma" value="{{old('alimentacion')}}" onkeyup="sumar();">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Kilometraje</label>
+                                        <input type="text" name="kilometros" class="form-control suma" value="{{old('kilometros')}}" onkeyup="sumar();">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Otros</label>
+                                        <input type="text" name="otro" class="form-control suma" value="{{old('otro')}}" onkeyup="sumar();">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Total</label>
+                                        <input type="text" name="total" id="total" class="form-control" value="{{old('total')}}" disabled>
+                                    </div>
                                 </div>
                             </div>
 

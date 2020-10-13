@@ -95,6 +95,25 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-12">
+                                <div class="form-group col-md-3">
+                                    <label>Alimentación</label>
+                                    <input type="text" name="alimentacion" class="form-control suma" value="{{$requests->alimentacion}}" onkeyup="sumar();">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Kilometraje</label>
+                                    <input type="text" name="kilometros" class="form-control suma" value="{{$requests->kilometros}}" onkeyup="sumar();">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Otros</label>
+                                    <input type="text" name="otro" class="form-control suma" value="{{$requests->otro}}" onkeyup="sumar();">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Total</label>
+                                    <input type="text" name="total" id="total" class="form-control" value="{{$requests->total}}" disabled>
+                                </div>
+                            </div>
+
                             <div class="col-md-12" style="background-color: #F8F8F8;">
                                 <br><h3 style="text-align: center;"><b>Trayecto 1</b></h3>
                                 @php

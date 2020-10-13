@@ -21,6 +21,9 @@ class CreateBuysTable extends Migration
             $table->string('reserva_vuelo');
             $table->string('reserva_hotel');
             $table->string('img_compra')->nullable();
+            $table->string('valor_viatico');
+            $table->string('id_user');
+            $table->boolean('estado')->default(true);
             $table->unsignedBigInteger('id_quotation')->nullable();
             $table->timestamps();
         });

@@ -88,5 +88,32 @@
             forceParse: false,
             autoclose: true
         });
+
+        $("#viaticos").change(function () {
+            $("#viaticos option:selected").each(function () {
+                viaticos = $(this).val();
+
+                //alert(viaticos);
+                if (viaticos == 1) {
+                    $("#valores").show();
+                } else {
+                    $("#valores").hide();
+                }
+            });
+        });
     });
+
+    function sumar() {
+        var total = 0;
+        $(".suma").each(function() {
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+            }
+        });
+        //alert(total);
+        document.getElementById('total').value = total;
+
+    }
 </script>

@@ -82,6 +82,25 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-12">
+                                <div class="form-group col-md-3">
+                                    <label>Alimentación</label>
+                                    <input class="form-control" value="{{$detalle->alimentacion}}" readonly>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Kilometraje</label>
+                                    <input class="form-control" value="{{$detalle->kilometros}}" readonly>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Otros</label>
+                                    <input class="form-control" value="{{$detalle->otro}}" readonly>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Total</label>
+                                    <input class="form-control" value="{{$detalle->total}}" readonly>
+                                </div>
+                            </div>
+
                             <div class="col-md-12" style="background-color: #F8F8F8;">
                                 <br><h3 style="text-align: center;"><b>Trayecto 1</b></h3>
                                 <div class="form-group col-md-4">

@@ -44,9 +44,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 	Route::get('/estados', 'OptionController@estados');
 	Route::get('/estados/pendiente', 'OptionController@pendientes');
+	Route::get('/estados/aprobado', 'OptionController@aprobado');
 
 	Route::get('/compra/{id}/index', 'BuyController@index');
 	Route::post('/compra/{id}', 'BuyController@store');
+	Route::get('/compra/{id}/aprobar', 'BuyController@aprobar');
+	Route::get('/compra/{id}/mails', 'BuyController@email');
 
 	//Route::get('/admin/pending', 'PendingController@index');
 });

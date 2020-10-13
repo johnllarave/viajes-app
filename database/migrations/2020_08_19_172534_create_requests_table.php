@@ -20,6 +20,11 @@ class CreateRequestsTable extends Migration
             $table->boolean('viaticos');
             $table->string('justificacion');
 
+            $table->string('alimentacion');
+            $table->string('kilometros');
+            $table->string('otro');
+            $table->string('total');
+
             $table->string('tipo_viaje_1');
             $table->string('origen_1');
             $table->string('destino_1');

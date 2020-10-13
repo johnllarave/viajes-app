@@ -106,6 +106,16 @@ class RequestController extends Controller
 		$requests->tipo_solicitud = $request->input('tipo_solicitud');
 		$requests->viaticos = $request->input('viaticos');
 		$requests->justificacion = $request->input('justificacion');
+
+		if ($request->input('viaticos') != 0) {
+			$requests->alimentacion = $request->input('alimentacion');
+			$requests->kilometros = $request->input('kilometros');
+			$requests->otro = $request->input('otro');
+
+			$suma = $request->input('kilometros') + $request->input('kilometros') + $request->input('otro');
+			$requests->total = $suma;
+		}
+
 		$requests->tipo_viaje_1 = $request->input('tipo_viaje_1');
 		$requests->origen_1 = $request->input('origen_1');
 		$requests->destino_1 = $request->input('destino_1');
@@ -205,6 +215,16 @@ class RequestController extends Controller
 		$requests->tipo_solicitud = $request->input('tipo_solicitud');
 		$requests->viaticos = $request->input('viaticos');
 		$requests->justificacion = $request->input('justificacion');
+
+		if ($request->input('viaticos') != 0) {
+			$requests->alimentacion = $request->input('alimentacion');
+			$requests->kilometros = $request->input('kilometros');
+			$requests->otro = $request->input('otro');
+
+			$suma = $request->input('kilometros') + $request->input('kilometros') + $request->input('otro');
+			$requests->total = $suma;
+		}
+
 		$requests->tipo_viaje_1 = $request->input('tipo_viaje_1');
 		$requests->origen_1 = $request->input('origen_1');
 		$requests->destino_1 = $request->input('destino_1');
