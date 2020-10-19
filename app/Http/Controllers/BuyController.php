@@ -22,7 +22,7 @@ class BuyController extends Controller
 
     	foreach ($buy as $valor) {
     		//if (Auth::user()->id != $valor['id_user']) {}
-    		if ($valor['id_buy'] != '') {
+    		if ($valor['id'] != '') {
     			$compra = 1;
     			return view('admin.buy.index')->with(compact('buy'))->with('id', $id)->with('compra', $compra);
     		} else {
@@ -36,27 +36,61 @@ class BuyController extends Controller
 
     public function store (Request $request, $id) {
 
-		$buy = new Buy();
+    	$consulta = Buy::select('*')
+						->where('id_quotation', '=', $id)
+						->get();
 
-		$buy->medio = $request->input('medio');
-		$buy->total_vuelo = $request->input('total_vuelo');
-		$buy->total_hotel = $request->input('total_hotel');
-		$buy->reserva_vuelo = $request->input('reserva_vuelo');
-		$buy->reserva_hotel = $request->input('reserva_hotel');
-		$buy->valor_viatico = $request->input('valor_viatico');
-		$buy->id_user = Auth::id();
-		$buy->id_quotation = $id;
-
-		$file = $request->file('img_compra');
-		// si el campo de la imagen viene vacia no entra a esta condición
-		if ($file != '') {
-			$path = public_path() . '/img/compra';
-			$fileName = uniqid() . $file->getClientOriginalName();
-			$moved = $file->move($path, $fileName);
-			$buy->img_compra = $fileName;
+		$valida = '';
+		foreach ($consulta as $valor) {
+			$valida = $valor['id_quotation'];
+			$id_buy = $valor['id'];
 		}
 
-		$buy->save(); //INSERT
+		if ($valida == '') { //Si no encuentra datos insert el registro
+			$buy = new Buy();
+
+			$buy->medio = $request->input('medio');
+			$buy->total_vuelo = $request->input('total_vuelo');
+			$buy->total_hotel = $request->input('total_hotel');
+			$buy->reserva_vuelo = $request->input('reserva_vuelo');
+			$buy->reserva_hotel = $request->input('reserva_hotel');
+			$buy->valor_viatico = $request->input('valor_viatico');
+			$buy->id_user = Auth::id();
+			$buy->id_quotation = $id;
+
+			$file = $request->file('img_compra');
+			// si el campo de la imagen viene vacia no entra a esta condición
+			if ($file != '') {
+				$path = public_path() . '/img/compra';
+				$fileName = uniqid() . $file->getClientOriginalName();
+				$moved = $file->move($path, $fileName);
+				$buy->img_compra = $fileName;
+			}
+
+			$buy->save(); //INSERT
+		} else { //Si encuentra datos actualiza el registro
+			$buy = Buy::find($id_buy);
+
+			$buy->medio = $request->input('medio');
+			$buy->total_vuelo = $request->input('total_vuelo');
+			$buy->total_hotel = $request->input('total_hotel');
+			$buy->reserva_vuelo = $request->input('reserva_vuelo');
+			$buy->reserva_hotel = $request->input('reserva_hotel');
+			$buy->valor_viatico = $request->input('valor_viatico');
+			$buy->id_user = Auth::id();
+			$buy->id_quotation = $id;
+
+			$file = $request->file('img_compra');
+			// si el campo de la imagen viene vacia no entra a esta condición
+			if ($file != '') {
+				$path = public_path() . '/img/compra';
+				$fileName = uniqid() . $file->getClientOriginalName();
+				$moved = $file->move($path, $fileName);
+				$buy->img_compra = $fileName;
+			}
+
+			$buy->save(); //UPDATE
+		}
 
 		/*$log_history = new History();
 

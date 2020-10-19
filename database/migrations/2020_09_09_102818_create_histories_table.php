@@ -14,7 +14,7 @@ class CreateHistoriesTable extends Migration
     public function up()
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->id('id_history');
+            $table->id();
             $table->unsignedBigInteger('state_id')->nullable();
             $table->unsignedBigInteger('requests_id')->nullable();
             $table->string('observacion')->nullable();

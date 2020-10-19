@@ -14,7 +14,7 @@ class CreateBuysTable extends Migration
     public function up()
     {
         Schema::create('buys', function (Blueprint $table) {
-            $table->id('id_buy');
+            $table->id();
             $table->string('medio');
             $table->string('total_vuelo');
             $table->string('total_hotel');
